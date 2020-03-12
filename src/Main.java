@@ -24,63 +24,51 @@ public class Main {
 //    public String toString(){
 //        return String.format();
 //    }
-    public static void main(String[] args) {
-        char[][] gameWorld = {
-                {'H', ' ', ' ', ' ', ' '},
-                {'-', ' ', '-', ' ', '-'},
-                {' ', ' ', ' ', ' ', ' '},
-                {'-', ' ', '-', ' ', '-'},
-                {' ', ' ', ' ', ' ', 'G'},
-                {'-', ' ', '-', ' ', '-'}
-        };
-        Land land1 = new Land(gameWorld);
-        Humans h1 = new Humans();
-        System.out.println("Enter your name: ");
-        Scanner scan = new Scanner(System.in);
-        while (true) {
+    public static void characterCreation() {
+        for (; ; ) {
+            Humans h1 = new Humans();
+            System.out.println("Welcome to Humans vs. Goblins. Please enter your name: ");
+            Scanner scan = new Scanner(System.in);
             h1.name = scan.nextLine();
-            System.out.println("Your name is... " + h1.name + "? (Y/N)");
-            char yOrN = scan.nextLine().charAt(0);
-            int attPoints = 10;
-            while (yOrN == 'n' || yOrN == 'N') {
-                System.out.println("Enter your correct name!");
-                break;
-            }
-            System.out.println("Nice! " + h1.name + ", you're going to have to fight some goblins... Choose your stats.");
-            while (yOrN == 'y' || yOrN == 'Y') {
+            System.out.println("Hello " + h1.name + "! Is this really your name? (Y/N)");
+            for (; ; ) {
+                char yOrN = scan.next().charAt(0);
+                if (yOrN == 'n' || yOrN == 'N') {
+                    break;
+                } else if (yOrN == 'y' || yOrN == 'Y') {
+                    System.out.println("Okay, " + h1.name + "! You are currently represented on the board by the '" + h1.H + "' symbol.");
+                    System.out.println("And the Goblin is the 'G'! You can either try to avoid him or fight him!");
+                    System.out.println("However, for now... You must prepare.");
+                    while (h1.attPoints > 0) {
+                        System.out.println("Points Left: " + h1.attPoints);
+                        System.out.println("HP: " + h1.HP);
+                        System.out.println("STR: " + h1.STR);
+                        System.out.println("What attribute would you like to change? (1 - HP / 2 - STR)");
+                        for (; ; ) {
+                            int hpOrStr = scan.nextInt();
+                            if (hpOrStr == 1) {
+                                System.out.println("Points Left: " + h1.attPoints);
+                                System.out.println("HP: " + h1.HP);
+                                System.out.println("STR: " + h1.STR);
+                                System.out.println("How many points would you like to put into HP? (1-10)");
+                            } else if (hpOrStr == 2) {
+                                System.out.println("Points Left: " + h1.attPoints);
+                                System.out.println("HP: " + h1.HP);
+                                System.out.println("STR: " + h1.STR);
+                                System.out.println("How many points would you like to put into STR? (1-10)");
+                            }
 
-                System.out.println("Points Left: " + attPoints);
-                System.out.println("HP: " + h1.HP);
-                System.out.println("STR: " + h1.STR);
-                System.out.println("What would you like to increase? (HP/STR)");
-                String statChoose = scan.nextLine().toUpperCase();
-
-                if (statChoose.equals("HP")) {
-                    System.out.println("How much would you like to increase HP by?");
-                    int inc = scan.nextInt();
-                    if (inc > 10) {
-                        System.out.println("You don't have that many points!");
-                    } else if (inc == 10) {
-                        System.out.println("You can't use all your points on one stat!");
-                    } else {
-                        attPoints -= inc;
-                        h1.HP += inc;
-                        System.out.println("Points Left: " + attPoints);
-                        System.out.println("You now have " + h1.HP + " HP! Are you sure? (Y/N)");
-                        yOrN = scan.next().charAt(0);
-                        if (yOrN == 'n' || yOrN == 'N') {
-                            attPoints += inc;
-                            h1.HP -= inc;
-                            System.out.println("Points Left: " + attPoints);
                         }
-                        System.out.println("Nice, " + h1.name + ". You have " + h1.HP + "HP!");
                     }
-                    
                 }
-
             }
-
         }
+    }
+
+    public static void main(String[] args) {
+        Land land1 = new Land();
+        characterCreation();
+
     }
 }
 
