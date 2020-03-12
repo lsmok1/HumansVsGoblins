@@ -1,10 +1,12 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Humans {
     String name;
     int attPoints = 10;
     int HP;
     int STR;
-    char H = 'H';
-//    public int reduceHP() {
-//
-//    }
+    String H = "\uD83D\uDC82";
+    static int [][] currentPos = new int[0][0];
 }
