@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -80,7 +81,7 @@ public class Land {
                                         System.out.println("You don't have that many points!");
                                         break;
                                     }
-                                    if (pointAllocate >= 10) {
+                                    if (pointAllocate >= 10 || h1.HP == 10 || h1.STR == 10) {
                                         System.out.println("Don't use all your points on one attribute!");
                                         break;
                                     } else {
@@ -148,7 +149,10 @@ public class Land {
             //printing a line for each row
             System.out.println();
         }
-    walkableArea(gameWorld, gob, hum);
+
+        System.out.println("Your turn!");
+        walkableArea(gameWorld, gob, hum);
+
     return gameWorld;
     }
     public void walkableArea(String[][] gameWorld, String gob, String hum) {
@@ -178,6 +182,49 @@ public class Land {
         //print the goblin and human chars in the randomly generated x/y coordinates
         gameWorld[randomX][randomY] = gob;
         gameWorld[randomX2][randomY2] = hum;
+        // NEED NESTED FOR LOOP TO PRINT 2D ARRAY WITH A NEW LINE IN BETWEEN
+        System.out.println(Arrays.deepToString(gameWorld));
+
+        ArrayList<Point> walkArea = new ArrayList<>();
+        for (int i = 0; i <= gameWorld.length; i+=2) {
+            for (int j = 0; j < gameWorld.length; j+=2) {
+                walkArea.add(new Point(i, j));
+            }
+        }
+        while (true) {
+            Scanner scan = new Scanner(System.in);
+            while (h1.HP > 0) {
+                char wasd = scan.nextLine().charAt(0);
+                for (Point point : walkArea) {
+                    if (point == h1.humPosition.get(0)) {
+                        switch (wasd) {
+                            case 'w':
+                                h1.humPosition.get(0).setLocation(h1.humPosition.get(0).getX(), h1.humPosition.get(0).getY()+2);
+//                                h1.humPosition = hum;
+                                System.out.println(gameWorld);
+                                break;
+                            case 'a':
+                                h1.humPosition.get(0).setLocation(h1.humPosition.get(0).getX()-2, h1.humPosition.get(0).getY());
+                                System.out.println(gameWorld);
+                                break;
+                            case 's':
+                                h1.humPosition.get(0).setLocation(h1.humPosition.get(0).getX(), h1.humPosition.get(0).getY()-2);
+                                System.out.println(gameWorld);
+                                break;
+                            case 'd':
+                                h1.humPosition.get(0).setLocation(h1.humPosition.get(0).getX()+2, h1.humPosition.get(0).getY());
+                                System.out.println(gameWorld);
+                                break;
+                            default:
+                                System.out.println("USE 'WASD' ONLY!");
+                        }
+                    }
+
+                }
+
+
+            }
+        }
 
     }
 
