@@ -24,7 +24,29 @@ public class Main {
     public static void main(String[] args) {
         Land land1 = new Land();
         System.out.println(land1);
-
+        System.out.println("Please use 'WASD' to move.");
+        Humans h1 = new Humans();
+        Goblins g1 = new Goblins();
+        //setting these new humans and gobs to the ones created in character creation
+        h1 = land1.h1;
+        g1 = land1.g1;
+        while (true) {
+            Scanner scan = new Scanner(System.in);
+            while (h1.HP > 0) {
+                char wasd = scan.nextLine().charAt(0);
+                switch (wasd) {
+                    case 'w':
+//                        h1.humPosition.get(0).getLocation().setLocation();
+                        break;
+                    case 'a':
+                        break;
+                    case 's':
+                        break;
+                    case 'd' :
+                        break;
+                }
+            }
+        }
     }
 }
 

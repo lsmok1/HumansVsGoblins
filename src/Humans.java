@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,5 +9,5 @@ public class Humans {
     int HP;
     int STR;
     String H = "\uD83D\uDC82";
-    static int [][] currentPos = new int[0][0];
+    ArrayList<Point> humPosition = new ArrayList<>();
 }

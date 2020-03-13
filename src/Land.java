@@ -1,3 +1,5 @@
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -137,33 +139,6 @@ public class Land {
                 {"-", " ", "-", " ", "-"}
         };
 
-        //creating 2 randomly generated x & y coordinates in increments of 2
-        int randomX = (int) Math.ceil(Math.random() * gameWorld.length-1) * 2;
-        int randomY = (int) Math.ceil(Math.random() * gameWorld.length-1) * 2;
-        int randomX2 = (int) Math.ceil(Math.random() * gameWorld.length-1) * 2;
-        int randomY2 = (int) Math.ceil(Math.random() * gameWorld.length-1) * 2;
-        //if the index is 6 or higher, re-roll
-        while (randomX >= 6 || randomY >= 6 || randomX2 >= 6 || randomY2 >= 6) {
-            randomX = (int) Math.ceil(Math.random() * gameWorld.length-1) * 2;
-            randomY = (int) Math.ceil(Math.random() * gameWorld.length-1) * 2;
-            randomX2 = (int) Math.ceil(Math.random() * gameWorld.length-1) * 2;
-            randomY2 = (int) Math.ceil(Math.random() * gameWorld.length-1) * 2;
-        }
-        //print the goblin and human chars in the randomly generated x/y coordinates
-        gameWorld[randomX][randomY] = gob;
-        gameWorld[randomX2][randomY2] = hum;
-        HashSet<Arrays> hashGob = new HashSet<>();
-//        h1.currentPos.get(0).add(gameWorld[randomX2][randomY2]);
-//        System.out.println(h1.currentPos);
-        //checking if the board contains human's positions... NOT FINISHED, HUMAN POSITION ISNT SET YET
-        for(int x=0; x < gameWorld.length-1; x++) {
-            for (int y=0; x < gameWorld.length-1; y++) {
-                int [][] newArr = new int[x][y];
-                if(newArr == h1.currentPos) {
-
-                }
-            }
-        }
 
         //for each character in the row
         for(String[] row : gameWorld) {
@@ -173,10 +148,39 @@ public class Land {
             //printing a line for each row
             System.out.println();
         }
-
-
+    walkableArea(gameWorld, gob, hum);
     return gameWorld;
     }
+    public void walkableArea(String[][] gameWorld, String gob, String hum) {
+        //creating 2 randomly generated x & y coordinates in increments of 2
+        int randomX = (int) Math.ceil(Math.random() * gameWorld.length-1) * 2;
+        int randomY = (int) Math.ceil(Math.random() * gameWorld.length-1) * 2;
+        int randomX2 = (int) Math.ceil(Math.random() * gameWorld.length-1) * 2;
+        int randomY2 = (int) Math.ceil(Math.random() * gameWorld.length-1) * 2;
+
+
+        while (randomX >= 6 || randomY >= 6 || randomX2 >= 6 || randomY2 >= 6) {
+            randomX = (int) Math.ceil(Math.random() * gameWorld.length - 1) * 2;
+            randomY = (int) Math.ceil(Math.random() * gameWorld.length - 1) * 2;
+            randomX2 = (int) Math.ceil(Math.random() * gameWorld.length - 1) * 2;
+            randomY2 = (int) Math.ceil(Math.random() * gameWorld.length - 1) * 2;
+            if (g1.gobPosition == h1.humPosition) {
+                randomX = (int) Math.ceil(Math.random() * gameWorld.length - 1) * 2;
+                randomY = (int) Math.ceil(Math.random() * gameWorld.length - 1) * 2;
+                randomX2 = (int) Math.ceil(Math.random() * gameWorld.length - 1) * 2;
+                randomY2 = (int) Math.ceil(Math.random() * gameWorld.length - 1) * 2;
+
+            } else {
+                g1.gobPosition.add(new Point(randomX, randomY));
+                h1.humPosition.add(new Point(randomX2, randomY2));
+            }
+        }
+        //print the goblin and human chars in the randomly generated x/y coordinates
+        gameWorld[randomX][randomY] = gob;
+        gameWorld[randomX2][randomY2] = hum;
+
+    }
+
     @Override
     public String toString(){
         return Arrays.toString(Land(h1, g1));
