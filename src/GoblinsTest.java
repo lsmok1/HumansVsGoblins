@@ -3,7 +3,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Goblins {
+public class GoblinsTest {
     String G = "\uD83D\uDC7A";
     int HP = (int) Math.ceil(Math.random() * 10);
     int STR = (int) Math.ceil(Math.random() * 10);

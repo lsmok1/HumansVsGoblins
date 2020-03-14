@@ -3,7 +3,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Humans {
+public class HumansTest {
     String name;
     int attPoints = 10;
     int HP;
