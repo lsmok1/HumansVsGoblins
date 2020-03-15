@@ -9,5 +9,4 @@ public class Human {
     int STR;
     String HumUnicode = "\uD83D\uDC82";
     ArrayList<Point> humPosition = new ArrayList<>();
-
 }
