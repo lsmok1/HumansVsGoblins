@@ -136,56 +136,56 @@ public class GameLogic {
                 char wasd = scan.nextLine().charAt(0);
                 switch(wasd) {
                     case 'w':
-                        gameBoard[h1.humPosition[0]][h1.humPosition[1]] = " ";
-                        gameBoard[h1.humPosition[0] + 2][h1.humPosition[1]] = hum;
-//                        gameBoard[g1.gobPosition[0]][g1.gobPosition[1]] = " ";
-//                        gameBoard[g1.gobPosition[0]][g1.gobPosition[1] +- Math.ceil(Math.random() *)] = hum;
+                        if (h1.humPosition[0]-2 < 0) {
+                            System.out.println("Can't go that way! Try again!");
+                        } else {
+                            //clears the current position
+                            gameBoard[h1.humPosition[0]][h1.humPosition[1]] = " ";
+                            //index 0 of humPosition is equal to humPosition-2
+                            h1.humPosition[0] = h1.humPosition[0]-2;
+                            //prints the new position
+                            gameBoard[h1.humPosition[0]][h1.humPosition[1]] = h1.HumUnicode;
+                        }
                         break;
                     case 'a':
-                        gameBoard[h1.humPosition[0]][h1.humPosition[1]] = " ";
-                        gameBoard[h1.humPosition[0]][h1.humPosition[1] - 2] = hum;
+                        if (h1.humPosition[1]-2 < 0) {
+                            System.out.println("Can't go that way! Try again!");
+                        } else {
+                            //clears the current position
+                            gameBoard[h1.humPosition[0]][h1.humPosition[1]] = " ";
+                            //index 0 of humPosition is equal to humPosition-2
+                            h1.humPosition[1] = h1.humPosition[1]-2;
+                            //prints the new position
+                            gameBoard[h1.humPosition[0]][h1.humPosition[1]] = h1.HumUnicode;
+                        }
                         break;
                     case 's':
-                        gameBoard[h1.humPosition[0]][h1.humPosition[1]] = " ";
-                        gameBoard[h1.humPosition[0] - 2][h1.humPosition[1]] = hum;
+                        if (h1.humPosition[0]+2 > 4) {
+                            System.out.println("Can't go that way! Try again!");
+                        } else {
+                            //clears the current position
+                            gameBoard[h1.humPosition[0]][h1.humPosition[1]] = " ";
+                            //index 0 of humPosition is equal to humPosition-2
+                            h1.humPosition[0] = h1.humPosition[0]+2;
+                            //prints the new position
+                            gameBoard[h1.humPosition[0]][h1.humPosition[1]] = h1.HumUnicode;
+                        }
                         break;
                     case 'd':
-                        gameBoard[h1.humPosition[0]][h1.humPosition[1]] = " ";
-                        gameBoard[h1.humPosition[0]][h1.humPosition[1] + 2] = hum;
+                        if (h1.humPosition[1]+2 > 4) {
+                            System.out.println("Can't go that way! Try again!");
+                        } else {
+                            //clears the current position
+                            gameBoard[h1.humPosition[0]][h1.humPosition[1]] = " ";
+                            //index 0 of humPosition is equal to humPosition-2
+                            h1.humPosition[1] = h1.humPosition[1]+2;
+                            //prints the new position
+                            gameBoard[h1.humPosition[0]][h1.humPosition[1]] = h1.HumUnicode;
+                        }
                         break;
                 }
                 GameBoard.printGameBoard(gameBoard, h1, g1);
             }
         }
-
-
-//        while (true) {
-//            Scanner scan = new Scanner(System.in);
-//            while (h1.HP > 0) {
-//                char wasd = scan.nextLine().charAt(0);
-//                for (Point point : walkArea) {
-//                    if (point == h1.humPosition.get(0)) {
-//                        switch (wasd) {
-//                            case 'w':
-//                                h1.humPosition.get(0).setLocation(h1.humPosition.get(0).getX(), h1.humPosition.get(0).getY()+2);
-//                                break;
-//                            case 'a':
-//                                h1.humPosition.get(0).setLocation(h1.humPosition.get(0).getX()-2, h1.humPosition.get(0).getY());
-//                                break;
-//                            case 's':
-//                                h1.humPosition.get(0).setLocation(h1.humPosition.get(0).getX(), h1.humPosition.get(0).getY()-2);
-//                                break;
-//                            case 'd':
-//                                h1.humPosition.get(0).setLocation(h1.humPosition.get(0).getX()+2, h1.humPosition.get(0).getY());
-//                                break;
-//                            default:
-//                                System.out.println("USE 'WASD' ONLY!");
-//                        }
-//                        System.out.println(gameBoard);
-//                    }
-//
-//                }
-//            }
-//        }
     }
 }

@@ -15,6 +15,7 @@ public class Main extends GameLogic{
             Human h1 = new Human();
             Goblin g1 = new Goblin();
             //init the gameBoard
+
             String[][] gameBoard = {
                     {" ", " ", " ", " ", " "},
                     {"-", " ", "-", " ", "-"},
@@ -23,7 +24,11 @@ public class Main extends GameLogic{
                     {" ", " ", " ", " ", " "},
                     {"-", " ", "-", " ", "-"}
             };
-//            ArrayList<Point> walkArea = new ArrayList<>();
+            int currentHumPos;
+            int currentGobPos;
+            gameBoard[h1.humPosition[0]][h1.humPosition[1]] = h1.HumUnicode;
+            gameBoard[g1.gobPosition[0]][g1.gobPosition[1]] = g1.GobUnicode;
+
 
             for (; ; ) {
                 new GameLogic();
