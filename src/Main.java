@@ -1,5 +1,7 @@
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main extends GameLogic{
@@ -21,13 +23,20 @@ public class Main extends GameLogic{
                     {" ", " ", " ", " ", " "},
                     {"-", " ", "-", " ", "-"}
             };
+//            ArrayList<Point> walkArea = new ArrayList<>();
 
             for (; ; ) {
                 new GameLogic();
                 new GameBoard();
                 System.out.println(characterCreation(h1, g1));
                 GameBoard.printGameBoard(gameBoard, h1, g1);
-                charMovement(gameBoard, h1, g1);
+                for (; ;) {
+                    charMovement(gameBoard, h1, g1);
+                    //GameBoard.printGameBoard(gameBoard, h1, g1);
+                    if (h1.HP == 0) {
+                        break;
+                    }
+                }
                 System.out.println("Would you like to play again?");
                 //init the char for scanning the answer
                 char playAgainAnswer = scan.nextLine().charAt(0);

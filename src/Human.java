@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,5 +9,5 @@ public class Human {
     int HP;
     int STR;
     String HumUnicode = "\uD83D\uDC82";
-    ArrayList<Point> humPosition = new ArrayList<>();
+    int[] humPosition = {0, 0};
 }
