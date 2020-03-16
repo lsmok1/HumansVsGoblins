@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class GameLogic {
@@ -131,6 +132,7 @@ public class GameLogic {
 //        }
         while (true) {
             Scanner scan = new Scanner(System.in);
+            Random rand = new Random();
             //max = (4,4); min = (0,0)
             while (h1.humPosition[0] <= 4 && h1.humPosition[0] >= 0 && h1.humPosition[1] <= 4 && h1.humPosition[1] >= 0) {
                 char wasd = scan.nextLine().charAt(0);
@@ -141,10 +143,18 @@ public class GameLogic {
                         } else {
                             //clears the current position
                             gameBoard[h1.humPosition[0]][h1.humPosition[1]] = " ";
+                            gameBoard[g1.gobPosition[0]][g1.gobPosition[1]] = " ";
                             //index 0 of humPosition is equal to humPosition-2
                             h1.humPosition[0] = h1.humPosition[0]-2;
+                            //generating a random int from 0-1, multiplying by 2 and then by -1 or 1 randomly
+                            g1.gobPosition[rand.nextInt(2)] = g1.gobPosition[0]+(rand.nextInt(2)*2*(rand.nextBoolean() ? 1 : -1));
+                            while (g1.gobPosition[0] < 0 || g1.gobPosition[0] >  4 || g1.gobPosition[1] < 0 || g1.gobPosition[1] > 4) {
+                                g1.gobPosition[rand.nextInt(2)] = g1.gobPosition[0]+(rand.nextInt(2)*2*(rand.nextBoolean() ? 1 : -1));
+                            }
+
                             //prints the new position
                             gameBoard[h1.humPosition[0]][h1.humPosition[1]] = h1.HumUnicode;
+                            gameBoard[g1.gobPosition[0]][g1.gobPosition[1]] = g1.GobUnicode;
                         }
                         break;
                     case 'a':
@@ -153,10 +163,16 @@ public class GameLogic {
                         } else {
                             //clears the current position
                             gameBoard[h1.humPosition[0]][h1.humPosition[1]] = " ";
+                            gameBoard[g1.gobPosition[0]][g1.gobPosition[1]] = " ";
                             //index 0 of humPosition is equal to humPosition-2
                             h1.humPosition[1] = h1.humPosition[1]-2;
+                            g1.gobPosition[rand.nextInt(2)] = g1.gobPosition[0]+(rand.nextInt(2)*2*(rand.nextBoolean() ? 1 : -1));
+                            while (g1.gobPosition[0] < 0 || g1.gobPosition[0] >  4 || g1.gobPosition[1] < 0 || g1.gobPosition[1] > 4) {
+                                g1.gobPosition[rand.nextInt(2)] = g1.gobPosition[0]+(rand.nextInt(2)*2*(rand.nextBoolean() ? 1 : -1));
+                            }
                             //prints the new position
                             gameBoard[h1.humPosition[0]][h1.humPosition[1]] = h1.HumUnicode;
+                            gameBoard[g1.gobPosition[0]][g1.gobPosition[1]] = g1.GobUnicode;
                         }
                         break;
                     case 's':
@@ -165,10 +181,16 @@ public class GameLogic {
                         } else {
                             //clears the current position
                             gameBoard[h1.humPosition[0]][h1.humPosition[1]] = " ";
+                            gameBoard[g1.gobPosition[0]][g1.gobPosition[1]] = " ";
                             //index 0 of humPosition is equal to humPosition-2
                             h1.humPosition[0] = h1.humPosition[0]+2;
+                            g1.gobPosition[rand.nextInt(2)] = g1.gobPosition[0]+(rand.nextInt(2)*2*(rand.nextBoolean() ? 1 : -1));
+                            while (g1.gobPosition[0] < 0 || g1.gobPosition[0] >  4 || g1.gobPosition[1] < 0 || g1.gobPosition[1] > 4) {
+                                g1.gobPosition[rand.nextInt(2)] = g1.gobPosition[0]+(rand.nextInt(2)*2*(rand.nextBoolean() ? 1 : -1));
+                            }
                             //prints the new position
                             gameBoard[h1.humPosition[0]][h1.humPosition[1]] = h1.HumUnicode;
+                            gameBoard[g1.gobPosition[0]][g1.gobPosition[1]] = g1.GobUnicode;
                         }
                         break;
                     case 'd':
@@ -177,15 +199,44 @@ public class GameLogic {
                         } else {
                             //clears the current position
                             gameBoard[h1.humPosition[0]][h1.humPosition[1]] = " ";
+                            gameBoard[g1.gobPosition[0]][g1.gobPosition[1]] = " ";
                             //index 0 of humPosition is equal to humPosition-2
                             h1.humPosition[1] = h1.humPosition[1]+2;
+                            g1.gobPosition[rand.nextInt(2)] = g1.gobPosition[0]+(rand.nextInt(2)*2*(rand.nextBoolean() ? 1 : -1));
+                            while (g1.gobPosition[0] < 0 || g1.gobPosition[0] >  4 || g1.gobPosition[1] < 0 || g1.gobPosition[1] > 4) {
+                                g1.gobPosition[rand.nextInt(2)] = g1.gobPosition[0]+(rand.nextInt(2)*2*(rand.nextBoolean() ? 1 : -1));
+                            }
                             //prints the new position
                             gameBoard[h1.humPosition[0]][h1.humPosition[1]] = h1.HumUnicode;
+                            gameBoard[g1.gobPosition[0]][g1.gobPosition[1]] = g1.GobUnicode;
                         }
                         break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + wasd);
                 }
+                combatInitiate(gameBoard, h1, g1);
                 GameBoard.printGameBoard(gameBoard, h1, g1);
+                System.out.println("Current HP: " + h1.HP);
+                if (h1.HP <= 0) {
+                    System.out.println("You died. Game over.");
+                    break;
+                }
+                if (g1.HP <= 0) {
+                    System.out.println("You killed the goblin!");
+                    break;
+                }
             }
+            break;
+        }
+    }
+
+    public static void combatInitiate(String[][] gameBoard, Human h1, Goblin g1) {
+        if (gameBoard[h1.humPosition[0]][h1.humPosition[1]] == gameBoard[g1.gobPosition[0]][g1.gobPosition[1]]) {
+            gameBoard[h1.humPosition[0]][h1.humPosition[1]] = "\u2694";
+            gameBoard[g1.gobPosition[0]][g1.gobPosition[1]] = "\u2694";
+            System.out.println("Combat initiated!");
+            h1.HP = h1.HP - (int) Math.ceil(Math.random() * g1.STR);
+            g1.HP = g1.HP - (int) Math.ceil(Math.random() * h1.STR);
         }
     }
 }

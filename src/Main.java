@@ -24,8 +24,7 @@ public class Main extends GameLogic{
                     {" ", " ", " ", " ", " "},
                     {"-", " ", "-", " ", "-"}
             };
-            int currentHumPos;
-            int currentGobPos;
+            //initializes the goblin and human
             gameBoard[h1.humPosition[0]][h1.humPosition[1]] = h1.HumUnicode;
             gameBoard[g1.gobPosition[0]][g1.gobPosition[1]] = g1.GobUnicode;
 
@@ -38,7 +37,11 @@ public class Main extends GameLogic{
                 for (; ;) {
                     charMovement(gameBoard, h1, g1);
                     //GameBoard.printGameBoard(gameBoard, h1, g1);
-                    if (h1.HP == 0) {
+//                    combatInitiate(gameBoard, h1, g1);
+                    if (h1.HP <= 0) {
+                        break;
+                    }
+                    if (g1.HP <= 0) {
                         break;
                     }
                 }
