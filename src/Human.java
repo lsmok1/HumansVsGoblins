@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Human {
     String humName;
-    int attPoints = 10;
+    int attPoints = 15;
     int HP;
     int STR;
     String HumUnicode = "\uD83D\uDC82";

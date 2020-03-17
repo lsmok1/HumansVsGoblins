@@ -40,8 +40,8 @@ public class Main extends GameLogic{
 //                    combatInitiate(gameBoard, h1, g1);
                     if (h1.HP <= 0) {
                         break;
-                    }
-                    if (g1.HP <= 0) {
+                    } else if (g1.HP <= 0) {
+                        g1 = new Goblin();
                         break;
                     }
                 }

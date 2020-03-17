@@ -30,15 +30,19 @@ public class GameLogic {
                                 System.out.println("Points Left: " + h1.attPoints);
                                 System.out.println("HP: " + h1.HP);
                                 System.out.println("STR: " + h1.STR);
-                                System.out.println("How many points would you like to put into HP? (1-10)");
+                                System.out.println("How many points would you like to put into HP? (1-14)");
                                 for (; ; ) {
                                     int pointAllocate = scan.nextInt();
                                     if (pointAllocate > h1.attPoints) {
+                                        System.out.println();
                                         System.out.println("You don't have that many points!");
+                                        System.out.println();
                                         break;
                                     }
-                                    if (pointAllocate >= 10) {
+                                    if (pointAllocate >= 15 || h1.HP == 15 || h1.STR == 15) {
+                                        System.out.println();
                                         System.out.println("Don't use all your points on one attribute!");
+                                        System.out.println();
                                         break;
                                     } else {
                                         h1.attPoints -= pointAllocate;
@@ -70,15 +74,19 @@ public class GameLogic {
                                 System.out.println("Points Left: " + h1.attPoints);
                                 System.out.println("HP: " + h1.HP);
                                 System.out.println("STR: " + h1.STR);
-                                System.out.println("How many points would you like to put into STR? (1-10)");
+                                System.out.println("How many points would you like to put into STR? (1-14)");
                                 int pointAllocate = scan.nextInt();
                                 for (; ; ) {
                                     if (pointAllocate > h1.attPoints) {
+                                        System.out.println();
                                         System.out.println("You don't have that many points!");
+                                        System.out.println();
                                         break;
                                     }
-                                    if (pointAllocate >= 10 || h1.HP == 10 || h1.STR == 10) {
+                                    if (pointAllocate >= 15 || h1.HP == 15 || h1.STR == 15) {
+                                        System.out.println();
                                         System.out.println("Don't use all your points on one attribute!");
+                                        System.out.println();
                                         break;
                                     } else {
                                         h1.attPoints -= pointAllocate;
@@ -220,9 +228,8 @@ public class GameLogic {
                 if (h1.HP <= 0) {
                     System.out.println("You died. Game over.");
                     break;
-                }
-                if (g1.HP <= 0) {
-                    System.out.println("You killed the goblin!");
+                } else if (g1.HP <= 0) {
+                    System.out.println("You killed the goblin! A new one has spawned!");
                     break;
                 }
             }
